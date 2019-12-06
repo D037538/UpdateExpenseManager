@@ -7,12 +7,21 @@ import org.springframework.stereotype.Service;
 import com.example.model.ExpenseModel;
 import com.example.model.Expenses;
 import com.example.repository.ExpensesRepository;
-
+/**
+ * 
+ * @author Anushree
+ *
+ */
 @Service
 public class ExpenseService {
 	@Autowired
 	private ExpensesRepository expensesRepository;
 
+	/**
+	 * 
+	 * @param expenseModel dto refer
+	 * @return e
+	 */
 	public Expenses save(ExpenseModel expenseModel) {
 		Expenses e = new Expenses();
 		e.setE_amount(expenseModel.getE_amount());
@@ -22,7 +31,10 @@ public class ExpenseService {
 
 		return e;
 	}
-
+/**
+ * 
+ * @return list of expenses
+ */
 	public List<Expenses> getAllExpenses() {
 		return expensesRepository.findAll();
 	}
