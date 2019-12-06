@@ -17,7 +17,7 @@ public class ExpenseService {
 		Expenses e = new Expenses();
 		e.setE_amount(expenseModel.getE_amount());
 		e.setCreateDateTime(expenseModel.getCreateDateTime());
-		e.setEc_id(expenseModel.getEc_id());
+	//	e.setEc_id(expenseModel.getEc_id());
 		expensesRepository.save(e);
 
 		return e;
