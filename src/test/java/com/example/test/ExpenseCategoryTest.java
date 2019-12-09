@@ -19,7 +19,6 @@ import com.example.service.ExpenseCategoryServiceException;
 import junit.framework.Assert;
 
 @RunWith(SpringRunner.class)
-
 @SpringBootTest
 class ExpenseCategoryTest {
 
@@ -27,7 +26,7 @@ class ExpenseCategoryTest {
 	private ExpenseCategoryService expenseCategoryService;
 
 	@Test
-	public void testCategorygetAll() throws ExpenseCategoryServiceException { 
+	public void testCategorygetAll() throws ExpenseCategoryServiceException {
 		ExpenseCategoryModel ec1 = new ExpenseCategoryModel();
 		ec1.setCategoryName("aaa");
 		expenseCategoryService.save(ec1);
@@ -37,6 +36,6 @@ class ExpenseCategoryTest {
 		// expenseCategoryService.getAllExpensesCategory().size());
 		ExpenseCategory newMember = expenseCategoryService.getByName(name);
 		Assert.assertEquals("aaa", newMember.getCategoryName());
-		//expenseCategoryService.deleteExpensesCategory();
+		// expenseCategoryService.deleteExpensesCategory();
 	}
 }

@@ -10,8 +10,6 @@ import com.example.model.ExpenseCategory;
 import com.example.model.ExpenseCategoryModel;
 import com.example.repository.ExpenceCategoryRepository;
 
-
-
 @Service
 public class ExpenseCategoryService {
 	@Autowired
@@ -24,7 +22,7 @@ public class ExpenseCategoryService {
 		return ec;
 	}
 
-	public List<ExpenseCategory> getAllExpensesCategory() throws ExpenseCategoryServiceException{
+	public List<ExpenseCategory> getAllExpensesCategory() {
 		return expenceCategoryRepository.findAll();
 	}
 
@@ -35,7 +33,7 @@ public class ExpenseCategoryService {
 	public ExpenseCategory deleteByName(String name) {
 		return expenceCategoryRepository.deleteByCategoryName(name);
 	}
-	
+
 	public void deleteExpenseCategoryById(Long id) {
 		Optional<ExpenseCategory> expenseCategory = expenceCategoryRepository.findById(id);
 
@@ -45,16 +43,17 @@ public class ExpenseCategoryService {
 			System.out.println("Record not found");
 		}
 	}
-	
 
 	public void deleteExpensesCategory() {
 		expenceCategoryRepository.deleteAll();
 
 	}
+
 	public ExpenseCategory getExpenseCategoryException() throws ExpenseCategoryServiceException {
 
 		throw new ExpenseCategoryServiceException();
 	}
+
 	public ExpenseCategory getExpenseCategoryNull() throws ExpenseCategoryServiceException {
 
 		return null;

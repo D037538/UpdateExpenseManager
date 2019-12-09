@@ -13,5 +13,6 @@ import com.example.model.ExpenseCategory;
 @Repository
 public interface ExpenceCategoryRepository extends JpaRepository<ExpenseCategory, Long> {
 	ExpenseCategory findByCategoryName(@Param("name") String name);
+
 	ExpenseCategory deleteByCategoryName(@Param("name") String name);
-} 
+}

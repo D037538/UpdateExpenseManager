@@ -2,6 +2,8 @@ package com.example.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,42 +18,77 @@ import com.example.model.ExpenseCategoryModel;
 import com.example.service.ExpenseCategoryService;
 import com.example.service.ExpenseCategoryServiceException;
 import com.example.exceptionhandling.ResourceNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("/api")
+/**
+ * 
+ * @author Anushree
+ *
+ */
 public class ExpenseCategotyController {
-
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private ExpenseCategoryService expenseCategoryService;
 
+	/***
+	 * 
+	 * @param expenseCategoryDto
+	 * @return
+	 */
 	@PostMapping("/addCategory")
 	public ExpenseCategory createExpensesCategories(@RequestBody ExpenseCategoryModel expenseCategoryDto) {
 		System.out.println("Expense name" + expenseCategoryDto.getCategoryName());
 		return expenseCategoryService.save(expenseCategoryDto);
 	}
+	/**
+	 * 
+	 * @return
+	 * @throws ResourceNotFoundException
+	 * @throws ExpenseCategoryServiceException
+	 */
 
 	@GetMapping("/categories")
-	public List<ExpenseCategory> getAllExpensesCategory()throws ResourceNotFoundException, ExpenseCategoryServiceException {
-		//System.out.print(expenseCategoryService.getAllExpensesCategory());
-		List<ExpenseCategory> expenseCategory =expenseCategoryService.getAllExpensesCategory();
+	public List<ExpenseCategory> getAllExpensesCategory()
+			throws ResourceNotFoundException, ExpenseCategoryServiceException {
+		logger.debug("Debug message");
+		logger.info("Info message");
+		logger.warn("Warn message");
+		logger.error("Error message");
+		// System.out.print(expenseCategoryService.getAllExpensesCategory());
+		List<ExpenseCategory> expenseCategory = expenseCategoryService.getAllExpensesCategory();
 		if (expenseCategory == null) {
 			throw new ResourceNotFoundException("Expense category not found");
 		}
 
 		return expenseCategory;
-		//return expenseCategoryService.getAllExpensesCategory();
+		// return expenseCategoryService.getAllExpensesCategory();
 	}
+/**
+ * 
+ * @return
+ * @throws ResourceNotFoundException
+ * @throws ExpenseCategoryServiceException
+ */
 	@GetMapping("/categories4")
-	public ExpenseCategory getAllExpensesCategoryNull()throws ResourceNotFoundException, ExpenseCategoryServiceException {
-		//System.out.print(expenseCategoryService.getAllExpensesCategory());
+	public ExpenseCategory getAllExpensesCategoryNull()
+			throws ResourceNotFoundException, ExpenseCategoryServiceException {
+		// System.out.print(expenseCategoryService.getAllExpensesCategory());
 		ExpenseCategory expenseCategory = expenseCategoryService.getExpenseCategoryNull();
 		if (expenseCategory == null) {
 			throw new ResourceNotFoundException("Expense category not found");
 		}
 
 		return expenseCategory;
-		//return expenseCategoryService.getAllExpensesCategory();
+		// return expenseCategoryService.getAllExpensesCategory();
 	}
+/**
+ * 
+ * @param expenseCategory
+ * @return
+ */
 	@PostMapping("/showcategoriesbyname")
 	public ExpenseCategory getByNameExpensesCategories(@RequestBody ExpenseCategory expenseCategory) {
 		System.out.println("Expense name" + expenseCategory.getCategoryName());
@@ -59,15 +96,25 @@ public class ExpenseCategotyController {
 		expenseCategoryService.getByName(name);
 		return expenseCategoryService.getByName(name);
 	}
-   @DeleteMapping("/deletecategories")
-   public ExpenseCategory deleteByNameExpensesCategories(@RequestBody ExpenseCategory expenseCategory) {
+/**
+ * 
+ * @param expenseCategory
+ * @return
+ */
+	@DeleteMapping("/deletecategories")
+	public ExpenseCategory deleteByNameExpensesCategories(@RequestBody ExpenseCategory expenseCategory) {
 		System.out.println("Expense name" + expenseCategory.getCategoryName());
-		String name = expenseCategory.getCategoryName(); 
+		String name = expenseCategory.getCategoryName();
 		return expenseCategoryService.getByName(name);
 	}
-   
-   @RequestMapping(value = "/categories2", method = RequestMethod.GET)
-	public ExpenseCategory getExpenseCategory() throws ResourceNotFoundException, ExpenseCategoryServiceException{
+/**
+ * 
+ * @return
+ * @throws ResourceNotFoundException
+ * @throws ExpenseCategoryServiceException
+ */
+	@RequestMapping(value = "/categories2", method = RequestMethod.GET)
+	public ExpenseCategory getExpenseCategory() throws ResourceNotFoundException, ExpenseCategoryServiceException {
 		try {
 			ExpenseCategory expenseCategory = expenseCategoryService.getExpenseCategoryException();
 			if (expenseCategory == null) {

@@ -2,12 +2,15 @@ package com.example.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -18,20 +21,10 @@ import org.hibernate.annotations.UpdateTimestamp;
 public class Expenses {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int e_id;
+	private long e_id;
 	private String e_amount;
-	@CreationTimestamp
-	private LocalDateTime createDateTime;
-	@UpdateTimestamp
-	private LocalDateTime updateDateTime;
-	/*
-	 * @ManyToOne
-	 * 
-	 * @JoinColumn(name = "ec_id") private ExpenseCategory expenseCategory;
-	 */
 	private int ec_id;
 
-	
 	public int getEc_id() {
 		return ec_id;
 	}
@@ -40,11 +33,24 @@ public class Expenses {
 		this.ec_id = ec_id;
 	}
 
-	public int getE_id() {
+	@CreationTimestamp
+	private LocalDateTime createDateTime;
+	@UpdateTimestamp
+	private LocalDateTime updateDateTime;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "expense_category_id", referencedColumnName = "id")
+	private ExpenseCategory expenseCategory;
+
+	public void setE_id(int e_id) {
+		this.e_id = e_id;
+	}
+
+	public long getE_id() {
 		return e_id;
 	}
 
-	public void setE_id(int e_id) {
+	public void setE_id(long e_id) {
 		this.e_id = e_id;
 	}
 
@@ -71,7 +77,5 @@ public class Expenses {
 	public void setUpdateDateTime(LocalDateTime updateDateTime) {
 		this.updateDateTime = updateDateTime;
 	}
-
-	
 
 }
